@@ -1,0 +1,53 @@
+module zad2(a,b);
+input [7:0]a;
+output reg [7:0]b;
+integer i;
+always@(*)
+if(a[7]==0) begin
+b=a;
+end else begin
+for(i=0; i<8; i=i+1) begin
+b[i]=~a[i];
+end
+for(i=0; i<8; i=i+1) begin
+if(b[i]==0) begin
+b[i]=b[i]+1;
+end else begin
+b[i]=b[i]-1;
+end
+end
+end
+endmodule
+/* Autorzy : Michał Siedlaczek */
+/* Grupa : 2 */
+
+module test;
+reg [7:0]x;
+wire z;
+integer j;
+
+zad2 zad1(x, z);
+
+initial begin
+for (j = 0; j < 8; j = j + 1) begin
+if(x[7]==0) begin
+z=x;
+end else begin
+for(j=0; j<8; j=j+1) begin
+z[j]=~x[j];
+end
+for(j=0; j<8; j=j+1) begin
+if(z[j]==0) begin
+z[j]=z[j]+1;
+j=8;
+end else begin
+z[j]=z[j]-1;
+end
+end
+end
+
+$display("%h\t %h\t", x, z);
+end
+end
+
+endmodule
